@@ -7,24 +7,24 @@
 <style>
 
 body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#667eea,#764ba2);
-    font-family:Arial, Helvetica, sans-serif;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#667eea,#764ba2);
+font-family:Arial, Helvetica, sans-serif;
 }
 
 .counter{
-    font-size:120px;
-    font-weight:bold;
-    color:white;
-    transition:transform 0.2s ease;
+font-size:120px;
+font-weight:bold;
+color:white;
+transition:transform 0.2s ease;
 }
 
 .animate{
-    transform:scale(1.25);
+transform:scale(1.25);
 }
 
 </style>
@@ -32,30 +32,44 @@ body{
 
 <body>
 
-<div id="token" class="counter">82</div>
+<div id="token" class="counter">86</div>
 
 <script>
 
-let count = 0;
-const token = document.getElementById("token");
+const token=document.getElementById("token")
 
-function increment(){
-    count++;
-    token.textContent = count;
+let count=localStorage.getItem("tokenCount")
 
-    token.classList.add("animate");
-    setTimeout(()=>token.classList.remove("animate"),150);
+if(count===null){
+count=parseInt(token.textContent)
+}else{
+count=parseInt(count)
+token.textContent=count
 }
 
-document.addEventListener("keydown",(e)=>{
-    if(e.code === "Space"){
-        e.preventDefault();
-        increment();
-    }
-});
+function increment(){
 
-document.addEventListener("click",increment);
-document.addEventListener("touchstart",increment);
+count++
+token.textContent=count
+
+localStorage.setItem("tokenCount",count)
+
+token.classList.add("animate")
+setTimeout(function(){
+token.classList.remove("animate")
+},150)
+
+}
+
+document.addEventListener("keydown",function(e){
+if(e.code==="Space"){
+e.preventDefault()
+increment()
+}
+})
+
+document.addEventListener("click",increment)
+document.addEventListener("touchstart",increment)
 
 </script>
 
