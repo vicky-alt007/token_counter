@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Token Counter</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.counter{
+    font-size:120px;
+    font-weight:bold;
+    color:white;
+    transition:transform 0.2s ease;
+}
+
+.animate{
+    transform:scale(1.25);
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="token" class="counter">21</div>
+
+<script>
+
+let count = 0;
+const token = document.getElementById("token");
+
+function increment(){
+    count++;
+    token.textContent = count;
+
+    token.classList.add("animate");
+    setTimeout(()=>token.classList.remove("animate"),150);
+}
+
+document.addEventListener("keydown",(e)=>{
+    if(e.code === "Space"){
+        e.preventDefault();
+        increment();
+    }
+});
+
+document.addEventListener("click",increment);
+document.addEventListener("touchstart",increment);
+
+</script>
+
+</body>
+</html>
